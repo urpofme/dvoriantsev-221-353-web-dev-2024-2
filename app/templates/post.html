@@ -26,16 +26,36 @@
             <div class="mt-4">
                 <h3>Комментарии:</h3>
                 {% for comment in post.comments %}
-                    <div class="mb-3">
-                        <strong>{{ comment.author }}</strong>
-                        <p>{{ comment.text }}</p>
-                        {% if comment.replies %}
+                <div class="d-flex align-items-start mb-3">
+                    <img src="{{ url_for('static', filename='images/avatar.jpg') }}" class="rounded-circle flex-shrink-0" style="width: 3rem; height: 3rem;">
+                    <div class="flex-grow-1 ms-3">
+                        <strong>{{comment.author}}</strong>
+                        <p>{{comment.text}}</p>
+                    </div>
+                </div>
+                        <!-- {% if comment.replies %}
                             <ul>
                                 {% for reply in comment.replies %}
                                     <li><strong>{{ reply.author }}</strong>: {{ reply.text }}</li>
                                 {% endfor %}
                             </ul>
+                        {% endif %} -->
+
+                   {% if comment.replies %}
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="ms-5 me-3">
+                                <img src="{{ url_for('static', filename='images/avatar.jpg') }}" class="rounded-circle flex-shrink-0" style="width: 3rem; height: 3rem;">
+                            </div>
+                            <div class="flex-grow-1">
+                                {% for reply in comment.replies %}
+                                <strong>{{reply.author}}</strong>
+                                <p>{{reply.text}}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
                         {% endif %}
+
+
                     </div>
                 {% endfor %}
             </div>
